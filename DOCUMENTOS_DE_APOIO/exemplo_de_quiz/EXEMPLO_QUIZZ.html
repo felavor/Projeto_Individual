@@ -64,7 +64,7 @@
                 <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
                 <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
                 <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+                <!-- <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button> -->
             </div>
 
         </div>
@@ -76,29 +76,92 @@
     const listaDeQuestoes = [
 
         {
-            pergunta: "Qual mês tem 30 dias?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
+            pergunta: "Qual dessas músicas, pertence ao Álbum 'Dos Prédios'?",
+            alternativaA: "Chapa Quente",
+            alternativaB: "Vem Desestressar",
+            alternativaC: "Foto do Corte",
+            alternativaD: "Contagem",
+            alternativaCorreta: "alternativaA"
+        },
+
+        {
+            pergunta: "Qual dessas músicas, pertence ao Álbum 'Dos Prédios Deluxe'?",
+            alternativaA: "7 da Sorte",
+            alternativaB: "Meio Pá",
+            alternativaC: "Engana Dizendo que Ama",
+            alternativaD: "Mandraka",
             alternativaCorreta: "alternativaC"
         },
 
         {
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
-            alternativaCorreta: "alternativaD"
+            pergunta: "Qual estilo musical predomina nas músicas do Veigh?",
+            alternativaA: "Sertanejo",
+            alternativaB: "Forró",
+            alternativaC: "Trap",
+            alternativaD: "Rap",
+            alternativaCorreta: "alternativaC"
         },
 
         {
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
+            pergunta: "Qual o nome de sua gravadora?",
+            alternativaA: "SalveCrazy REC",
+            alternativaB: "SuperNova",
+            alternativaC: "Mainstreet",
+            alternativaD: "Nadamal",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            pergunta: "O Veigh possui aproximadamente, quantos ouvintes mensais?",
+            alternativaA: "10M",
+            alternativaB: "9M",
+            alternativaC: "8M",
+            alternativaD: "7M",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {
+            pergunta: "Com qual artista internacional, Veigh realizou seu primeiro 'ft.'",
+            alternativaA: "Kaash Paige",
+            alternativaB: "Nemzzz",
+            alternativaC: "Taylor Swift",
+            alternativaD: "Timbaland",
+            alternativaCorreta: "alternativaA"
+        },
+
+        {
+            pergunta: "Veigh já fez uma música relacionada um time de e-Sports, qual time é esse?",
+            alternativaA: "Fúria",
+            alternativaB: "Loud",
+            alternativaC: "Mibr",
+            alternativaD: "C9",
+            alternativaCorreta: "alternativaC"
+        },
+        
+        {
+            pergunta: "A música 'Adora a Bunda, odeia o Rosto' tem qual estilo?",
+            alternativaA: "Trap",
+            alternativaB: "Rap",
+            alternativaC: "Funk",
+            alternativaD: "Pop",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {
+            pergunta: "De quais álbuns abaixo o Veigh NÃO participou?",
+            alternativaA: "EVDC Deluxe - Ryu",
+            alternativaB: "Semréh - Ryu",
+            alternativaC: "Magic Show - Nagalli",
+            alternativaD: "Dacoromode - Tz da Coronel",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            pergunta: "Qual o nome da mãe do Veigh?",
+            alternativaA: "Lyllian Veigh",
+            alternativaB: "Helena Veigh",
+            alternativaC: "Maria Veigh",
+            alternativaD: "Miriam Veigh",
             alternativaCorreta: "alternativaD"
         }
 
@@ -197,10 +260,10 @@
         limparCoresBackgroundOpcoes()
     }
 
-    function tentarNovamente() {
-        // atualiza a página
-        window.location.reload()
-    }
+    // function tentarNovamente() {
+    //     // atualiza a página
+    //     window.location.reload()
+    // }
 
     function checarResposta() {
         const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
