@@ -17,7 +17,7 @@
     </div>
     <div class="titulo_quiz">
 
-        <h1>Você é realmente fã do 'VEIGH'?</h1>
+        <h1>Olá, <span id="b_usuario">usuário</span>! Você é realmente fã do 'VEIGH'?</h1>
     </div>
     <span class="subtitulo">Vamos Ver!</span>
 
@@ -88,6 +88,9 @@
 
 </html>
 <script>
+
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
     const listaDeQuestoes = [
 
         {
