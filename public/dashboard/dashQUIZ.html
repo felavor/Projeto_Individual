@@ -1,0 +1,53 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h2>Dashboard de Pontuação dos Usuários</h2>
+
+    <canvas id="graficoPontuacao" width="600" height="400"></canvas>
+
+    <script>
+        fetch("/dadosdash/buscarDados")
+            .then(res => res.json())
+            .then(resposta => {
+                console.log("Dados recebidos:", resposta);
+
+                const nomes = resposta.map(item => item.usuario);
+                const pontuacoes = resposta.map(item => item.questoesCertas);
+
+                const ctx = document.getElementById('graficoPontuacao').getContext('2d');
+                const grafico = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: nomes,
+                        datasets: [{
+                            label: 'Pontuação',
+                            data: pontuacoes,
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    precision: 0
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(erro => {
+                console.error("Erro ao obter dados para o gráfico:", erro);
+            });
+    </script>
+
+</body>
+</html>

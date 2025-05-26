@@ -16,3 +16,12 @@ CREATE TABLE quiz (
     perguntas TEXT,
     correta BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+CREATE TABLE respostas_usuarios (
+    fkUsuario INT,
+    fkQuiz INT,
+    respostas_certas INT,
+    primary key (fkUsuario, fkQuiz),
+    foreign key (fkUsuario) references usuario(id),
+    foreign key (fkQuiz) references quiz(id)
+);
