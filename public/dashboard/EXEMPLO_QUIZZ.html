@@ -13,6 +13,7 @@
     <div class="header">
         <div class="container">
             <h1 class="titulo">FELLIPE LAVOR - 1 CCO A</h1>
+            <p><button class="botao_analise" id="botaoAnaliseDesempenho">Analisar Desempenho</button></p>
         </div>
     </div>
     <div class="titulo_quiz">
@@ -90,7 +91,7 @@
 <script>
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    
+
 
     const listaDeQuestoes = [
 
@@ -193,7 +194,16 @@
     let certas = 0
     let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
+    let quizFinalizado = false;
     // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
+
+    document.getElementById('botaoAnaliseDesempenho').addEventListener('click', function () {
+            if (quizFinalizado) {
+                window.location.href = "dashQUIZ.html";
+            } else {
+                alert("Finalize o quiz antes de analisar seu desempenho!");
+            }
+        });
 
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
@@ -212,7 +222,7 @@
         btnSubmeter.disabled = false
         btnProx.disabled = true
         // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = true
+        // btnTentarNovamente.disabled = true
     }
 
     function preencherHTMLcomQuestaoAtual(index) {
@@ -276,7 +286,7 @@
         } else {
             enviarDados();
             finalizarJogo();
-            
+
         }
         limparCoresBackgroundOpcoes()
     }
@@ -364,39 +374,42 @@
 
         document.getElementById('jogo').classList.add("text-new-gray")
 
+        
+
         btnProx.disabled = true
         btnSubmeter.disabled = true
+        quizFinalizado = true
         // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = false
+        // btnTentarNovamente.disabled = false
 
     }
 
     function enviarDados() {
-    const fkUsuario = sessionStorage.ID_USUARIO;
-    const fkQuiz = 1;
-    const respostasCertas = pontuacaoFinal;
+        const fkUsuario = sessionStorage.ID_USUARIO;
+        const fkQuiz = 1;
+        const respostasCertas = pontuacaoFinal;
 
-    fetch("/dadosdash/registrarPontuacao", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            fkUsuario: fkUsuario,
-            fkQuiz: fkQuiz,
-            respostasCertas: respostasCertas
+        fetch("/dadosdash/registrarPontuacao", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkUsuario: fkUsuario,
+                fkQuiz: fkQuiz,
+                respostasCertas: respostasCertas
+            })
         })
-    })
-    .then(res => {
-        if (res.ok) {
-            alert("Pontuação enviada com sucesso!");
-        } else {
-            alert("Houve um erro ao enviar a pontuação.");
-        }
-    })
-    .catch(err => {
-        console.error("Erro na requisição:", err);
-    });
-}
+            .then(res => {
+                if (res.ok) {
+                    alert("Pontuação enviada com sucesso!");
+                } else {
+                    alert("Houve um erro ao enviar a pontuação.");
+                }
+            })
+            .catch(err => {
+                console.error("Erro na requisição:", err);
+            });
+    }
 
 </script>
