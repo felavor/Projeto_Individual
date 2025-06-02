@@ -249,7 +249,7 @@ body {
 .card {
   width: 50%;
   background-color: #7d674c;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 30px;
   display: flex;
   align-items: center;
