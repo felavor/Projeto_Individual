@@ -1,15 +1,37 @@
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/dashboard/cssdash.css">
 </head>
-<body>
- 
-    <h2>Dashboard de Pontuação dos Usuários</h2>
 
-    <canvas id="graficoPontuacao" style="display: block; box-sizing: border-box; height: 240px; width: 480px;" width="480" height="240"></canvas>
+<body>
+
+    <div class="header">
+        <div class="container">
+            <h1 class="titulo">FELLIPE LAVOR - 1 CCO A</h1>
+        </div>
+    </div>
+
+    <div class="cards-informacoes">
+        <div class="card-informacao">
+            <h3>Sua Pontuação</h3>
+            <p id="pontuacaoUsuario"></p>
+        </div>
+        <div class="card-informacao">
+            <h3>Média dos Usuários</h3>
+            <p id="mediaPontuacao"></p>
+        </div>
+    </div>
+    <div class="titulo_dash">
+        <h2>Pontuação dos Usuários</h2>
+    </div>
+    <div class="dashboard-container">
+        <canvas id="graficoPontuacao" style="display: block; box-sizing: border-box; height: 240px; width: 480px;"
+            width="480" height="240"></canvas>
+    </div>
 
     <script>
         fetch("/dadosdash/buscarDados")
@@ -19,7 +41,27 @@
 
                 const nomes = resposta.map(item => item.usuario);
                 const pontuacoes = resposta.map(item => item.questoesCertas);
+                const usuarioAtual = sessionStorage.NOME_USUARIO;
+                const dadosUsuario = resposta.find(item => item.usuario === usuarioAtual);
+                const pontuacaoUsuario = dadosUsuario ? dadosUsuario.questoesCertas : 0;
 
+                document.getElementById('pontuacaoUsuario').innerText = pontuacaoUsuario;
+
+                const somaPontuacoes = pontuacoes.reduce((acc, val) => acc + val, 0); // reduce -> soma todos os valores (reduz para um unico valor) (acc -> acumulador, val -> valor atual)
+                const media = (somaPontuacoes / pontuacoes.length).toFixed(2);
+
+                document.getElementById('mediaPontuacao').innerText = media;
+
+                setTimeout(() => {
+                    if (pontuacaoUsuario > media) {
+                        alert("Aí sim! Sua pontuação está acima da média dos usuários.");
+                    } else if (pontuacaoUsuario < media) {
+                        alert("Sua pontuação está abaixo da média dos usuários. Precisa ouvir mais o VEIGH!");
+                    } else {
+                        alert("Sua pontuação é igual à média dos usuários.");
+                    }
+                }, 1000);
+                
                 const ctx = document.getElementById('graficoPontuacao').getContext('2d');
                 const grafico = new Chart(ctx, {
                     type: 'bar',
@@ -28,8 +70,8 @@
                         datasets: [{
                             label: 'Pontuação',
                             data: pontuacoes,
-                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: '#7d674c',
+                            borderColor: '#7d674c',
                             borderWidth: 2
                         }]
                     },
@@ -48,6 +90,9 @@
             .catch(erro => {
                 console.error("Erro ao obter dados para o gráfico:", erro);
             });
+
+
     </script>
 </body>
+
 </html>
