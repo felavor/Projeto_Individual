@@ -7,7 +7,7 @@ function buscarPontuacao() {
     var instrucaoSql = `
         SELECT 
             u.nome AS usuario, 
-            r.repostas_certas AS questoesCertas
+            r.respostas_certas AS questoesCertas
         FROM respostas_usuarios r
         INNER JOIN usuario u ON u.id = r.fkUsuario;
     `;
@@ -19,9 +19,9 @@ function inserirPontuacao(fkUsuario, fkQuiz, respostasCertas) {
     console.log("Executando SQL:", instrucaoSql);
 
     var instrucaoSql = `
-        INSERT INTO respostas_usuarios (fkUsuario, fkQuiz, repostas_certas)
+        INSERT INTO respostas_usuarios (fkUsuario, fkQuiz, respostas_certas)
         VALUES (${fkUsuario}, ${fkQuiz}, ${respostasCertas})
-        ON DUPLICATE KEY UPDATE repostas_certas = ${respostasCertas};
+        ON DUPLICATE KEY UPDATE respostas_certas = ${respostasCertas};
     `;
     console.log("Executando SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

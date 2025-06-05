@@ -72,7 +72,7 @@ function cadastrar(req, res) {
     // } else {
 
     // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-    console.log("peixe")
+    console.log("veio até aqui")
     usuarioModel.cadastrar(nome, email, senha)
         .then(
             function (resultado) {
